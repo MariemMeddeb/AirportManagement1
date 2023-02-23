@@ -33,10 +33,11 @@ int calculateAge = 0;
 passenger.GetAge(new DateTime(2000, 1, 1), ref calculateAge);
 Console.WriteLine(calculateAge);
 passenger.BirthDate = new DateTime(2000, 1, 1);
-passenger.GetAge(passenger);
-Console.WriteLine(passenger.GetAge(new DateTime(2000, 1, 1), ref calculateAge));
+//passenger.GetAge(passenger);
+//Console.WriteLine(passenger.Age);
 
 //question 14
-Passenger john = new Passenger(35);
-int age = john.getAge();
-Console.WriteLine(john.getAge());
+//Passenger john = new Passenger(35);
+//int age = john.getAge();
+//Console.WriteLine(john.getAge());
+

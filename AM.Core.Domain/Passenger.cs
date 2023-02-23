@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 using System.Text;
@@ -17,12 +18,27 @@ namespace AM.Core.Domain
         public string LastName { get; set; }
         public string TelNumber { get; set; }
         public IList<Flight> Flights { get; set; }
+        //public int Age { get; set; }
         //Question 14
         //l'attribut age doit etre privé
-        private int Age { get; set; }
-        public Passenger() { }  
-        public Passenger(int age) {
-        Age= age;
+        int age;
+       
+        
+        public int Age 
+        {
+            get
+            {
+                age = DateTime.Now.Year - BirthDate.Year;
+                if (BirthDate.Month > DateTime.Now.Month)
+                {
+                    age -= 1;
+                }
+                else if (BirthDate.Month == DateTime.Now.Month && BirthDate.Day > DateTime.Now.Day)
+                {
+                    age--;
+                }
+                    return age;
+            }
         }
 //TP1.question 11.a.b
 //       public bool CheckProfile(string nom, string prenom)
@@ -43,16 +59,16 @@ namespace AM.Core.Domain
         {
             return EmailAddress == email && LastName == nom && FirstName == prenom;
         }
-
+p
  //TP1.question 12.a
  //virtual maaneha ynajem ybadel feha f l classe fille 
         public virtual string GetPassengerType()
         {
             return "Im a Passenger";
-        }
+        } 
 
         //tp1.Q13
-        public int GetAge(DateTime birthDate, ref int calculateAge)
+        public void GetAge(DateTime birthDate, ref int calculateAge)
         {
             calculateAge = DateTime.Now.Year - birthDate.Year;
             if (birthDate.Month > DateTime.Now.Month)
@@ -63,26 +79,26 @@ namespace AM.Core.Domain
             {
                 calculateAge = calculateAge - 1;
             }
-            return calculateAge;
+         
         }
 
-        public void GetAge(Passenger aPassenger)
-        {
-                aPassenger.Age = DateTime.Now.Year - aPassenger.BirthDate.Year;
-                if (aPassenger.BirthDate.Month > DateTime.Now.Month)
-                {
-                    aPassenger.Age -= 1;
-                }
-                else if (aPassenger.BirthDate.Month == DateTime.Now.Month && aPassenger.BirthDate.Day > DateTime.Now.Day)
-                {
-                    aPassenger.Age--;
-                }
-            }
-        public int getAge()
-        {
-            return Age;
-        }
-
+   //    public void GetAge(Passenger aPassenger)
+   //    {
+   //            aPassenger.Age = DateTime.Now.Year - aPassenger.BirthDate.Year;
+   //            if (aPassenger.BirthDate.Month > DateTime.Now.Month)
+   //            {
+   //                aPassenger.Age -= 1;
+   //            }
+   //            else if (aPassenger.BirthDate.Month == DateTime.Now.Month && aPassenger.BirthDate.Day > DateTime.Now.Day)
+   //            {
+   //                aPassenger.Age--;
+   //            }
+   //        }
+   //    public int getAge()
+    //    {
+    //        return Age;
+    //    }
+    //
 
         public override string ToString()
         {
